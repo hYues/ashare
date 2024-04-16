@@ -13,7 +13,7 @@ Focus on the price of a single stock today.
   }
 ```
 
-## Use case
+## Usage
 
 Mouse covers the bottom `Ashare` status bar then a chart of today's stock price for the set stock is displayed.
 
