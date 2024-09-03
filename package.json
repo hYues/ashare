@@ -2,7 +2,7 @@
   "name": "ashare",
   "displayName": "Ashare",
   "description": "Focus on the price of a single stock today.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "HaoYue-VSCode",
   "author": "Haoyue",
   "icon": "public/logo.png",

@@ -53,18 +53,23 @@ const getStockData = async () => {
           const currentPrice = data.f43 / 100;
           const maxPrice = data.f44 / 100;
           const minPrice = data.f45 / 100;
+          const startAt = data.f46 / 100;
+          const lastAt = data.f60 / 100;
+          const priceCompre = startAt >= lastAt ? "📈" : "📉";
 
           vscode.window.showInformationMessage(
-            `${name} [${code}] 股价走势 📈`,
+            `${name} [${code}] ${priceCompre} 昨收：${lastAt}，今开：${startAt} 📢`,
             `📌 最新：${currentPrice}`,
             `最高：${maxPrice}`,
             `最低：${minPrice}`
-          );
+          ).then(() => {});
         }
       }
     })
     .catch((err) => {
-      console.warn("请求接口失败", err);
+      vscode.window.showInformationMessage(
+        `请求数据失败，请稍候重试 👀`
+      ).then(() => {});
     });
 };
 
