@@ -26,3 +26,20 @@ export interface EastmoneyStockRes {
     f107: number;
   };
 }
+
+export interface AppConfig {
+  /** 股票代码 */
+  stock: string;
+  /** 代码 */
+  code: string;
+  /** 交易所 */
+  market: 0 | 1;
+  /** 走势图高度  */
+  height: number;
+  /** 是否开启自动刷新 */
+  autoRefresh: boolean;
+  /** 自动刷新间隔时间 */
+  autoRefreshTime: number;
+  /** API 查询到组合字段： market.code */
+  secid: string;
+}

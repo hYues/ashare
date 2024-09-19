@@ -9,7 +9,9 @@ Focus on the price of a single stock today.
 ```json
  "ashare": {
     "stock": "SH000001", // SH000001 | SZ000001
-    "picHeight": 578
+    "picHeight": 578, // 单日股价走势图
+    "autoRefresh": false, // 是否开启自动刷新
+    "autoRefreshTime": 30000, // 自动刷新间隔时间
   }
 ```
 
