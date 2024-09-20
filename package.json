@@ -2,11 +2,14 @@
   "name": "ashare",
   "displayName": "Ashare",
   "description": "Focus on the price of a single stock today.",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "publisher": "HaoYue-VSCode",
   "author": "Haoyue",
   "icon": "public/logo.png",
-  "repository": "https://github.com/hYues/Ashare.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hYues/Ashare.git"
+  },
   "engines": {
     "vscode": "^1.88.0"
   },
@@ -24,9 +27,11 @@
           "type": "object",
           "default": {
             "stock": "SH000001",
-            "picHeight": 578
+            "picHeight": 578,
+            "autoRefresh": false,
+            "autoRefreshTime": 30000
           },
-          "description": "stock : Stock code (SH000001 | SZ000001) \n picHeight : Image height"
+          "description": "setting"
         }
       }
     }
@@ -34,7 +39,8 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "watch": "tsc -watch -p ./",
+    "deploy": "vsce publish"
   },
   "devDependencies": {
     "@types/node": "18.x",
