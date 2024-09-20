@@ -29,6 +29,15 @@ export default class StockService {
             const lastAt = data.f60 / 100;
             const priceCompre = startAt >= lastAt ? "📈" : "📉";
 
+            // 暂未开盘
+            if (!startAt) {
+              return window
+                .showInformationMessage(
+                  `${name} [${code}] ${priceCompre} 昨收：${lastAt}，最新：${currentPrice} 📢`
+                )
+                .then(() => {});
+            }
+
             window
               .showInformationMessage(
                 `${name} [${code}] ${priceCompre} 昨收：${lastAt}，今开：${startAt} 📢`,

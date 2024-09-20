@@ -35,6 +35,20 @@ export default class StatusBar {
   }
 
   /**
+   * 显示状态栏
+   */
+  public show() {
+    this.statusBarItem?.show();
+  }
+
+  /**
+   * 隐藏状态栏
+   */
+  public hide() {
+    this.statusBarItem?.hide();
+  }
+
+  /**
    * 更新显示的文本内容
    */
   public refreshText() {
@@ -48,9 +62,11 @@ export default class StatusBar {
           const currentPrice = data.f43 / 100;
           const startAt = data.f46 / 100;
           const priceCompre = currentPrice >= startAt ? "📈" : "📉";
+          const percent = (((currentPrice - startAt) / startAt) * 100).toFixed(
+            2
+          );
 
-          this.statusBarItem.text = `${priceCompre} ${name} [ ${currentPrice} ]`;
-          console.log(this.statusBarItem.text);
+          this.statusBarItem.text = `${priceCompre} ${name} [ ${currentPrice} ] ${percent}%`;
         }
       }
     });

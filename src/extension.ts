@@ -1,4 +1,4 @@
-import { ExtensionContext, workspace } from "vscode";
+import { ExtensionContext, window, workspace } from "vscode";
 import StatusBar from "./components/StatusBar";
 import { registerCommands } from "./registerCommand";
 import AppService from "./services/AppService";
@@ -6,6 +6,13 @@ import StockService from "./services/StockService";
 import { isStockTime } from "./utils/time";
 
 let loopTimer: NodeJS.Timeout | null = null;
+
+function clearLoopTimer() {
+  if (loopTimer) {
+    clearInterval(loopTimer);
+    loopTimer = null;
+  }
+}
 
 // 激活
 export function activate(context: ExtensionContext) {
@@ -23,10 +30,7 @@ export function activate(context: ExtensionContext) {
       return;
     }
 
-    if (loopTimer) {
-      clearInterval(loopTimer);
-      loopTimer = null;
-    }
+    clearLoopTimer();
 
     loopTimer = setInterval(() => {
       // 检测是否为交易时间
@@ -46,14 +50,24 @@ export function activate(context: ExtensionContext) {
     statusBar.refresh();
   });
 
+  // 监听工作区激活状态
+  window.onDidChangeWindowState((event) => {
+    if (event.focused) {
+      // 工作区被激活
+      statusBar.show();
+      setIntervalTime();
+    } else {
+      // 工作区失去焦点
+      clearLoopTimer();
+      statusBar.hide();
+    }
+  });
+
   // 注册命令
   registerCommands(context, stockService);
 }
 
 // 卸载
 export function deactivate() {
-  if (loopTimer) {
-    clearInterval(loopTimer);
-    loopTimer = null;
-  }
+  clearLoopTimer();
 }
